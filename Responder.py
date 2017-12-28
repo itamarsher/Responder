@@ -16,10 +16,18 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import optparse
 import ssl
+import logging
 
 from SocketServer import TCPServer, UDPServer, ThreadingMixIn
 from threading import Thread
 from utils import *
+
+logging.basicConfig(filename='/var/log/responder_tool.log', level=logging.DEBUG, format='%(threadName)s - %(message)s')
+console_logger = logging.StreamHandler()
+console_logger.setLevel(logging.DEBUG)
+console_formatter = logging.Formatter('%(threadName)s - %(message)s')
+console_logger.setFormatter(console_formatter)
+logging.getLogger('').addHandler(console_logger)
 
 banner()
 
